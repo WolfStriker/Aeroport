@@ -1,3 +1,5 @@
+package com.springapp.mvc.beans;
+
 import javax.persistence.*;
 
 /**
@@ -6,7 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "aeroport", schema = "", catalog = "aeroport")
 public class AeroportBean {
-    //totototototot
     private int idAeroport;
     private String nomAeroport;
 
