@@ -1,5 +1,6 @@
 package com.springapp.mvc.controller;
 
+import com.springapp.mvc.Database;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +27,7 @@ public class HelloController {
     @ResponseBody
     public String testJSON(ModelMap model) throws JSONException {
 
+        Database db;
 
         JSONArray array = new JSONArray();
         JSONObject o = new JSONObject();

@@ -1,16 +1,16 @@
-package com.springapp.mvc.beans;
+import javax.persistence.*;
 
 /**
- * Created by Antoine on 06/02/2015.
+ * Created by Antoine on 13/02/2015.
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "aeroport", schema = "", catalog = "aeroport")
+@Entity
+@Table(name = "aeroport", schema = "", catalog = "aeroport")
 public class AeroportBean {
     private int idAeroport;
     private String nomAeroport;
 
-    @javax.persistence.Id
-    @javax.persistence.Column(name = "idAeroport")
+    @Id
+    @Column(name = "idAeroport")
     public int getIdAeroport() {
         return idAeroport;
     }
@@ -19,8 +19,8 @@ public class AeroportBean {
         this.idAeroport = idAeroport;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "nomAeroport")
+    @Basic
+    @Column(name = "nomAeroport")
     public String getNomAeroport() {
         return nomAeroport;
     }

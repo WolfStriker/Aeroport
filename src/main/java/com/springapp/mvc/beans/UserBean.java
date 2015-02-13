@@ -1,16 +1,16 @@
-package com.springapp.mvc.beans;
+import javax.persistence.*;
 
 /**
- * Created by Antoine on 06/02/2015.
+ * Created by Antoine on 13/02/2015.
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "user", schema = "", catalog = "aeroport")
+@Entity
+@Table(name = "user", schema = "", catalog = "aeroport")
 public class UserBean {
     private int login;
     private String password;
 
-    @javax.persistence.Id
-    @javax.persistence.Column(name = "login")
+    @Id
+    @Column(name = "login")
     public int getLogin() {
         return login;
     }
@@ -19,8 +19,8 @@ public class UserBean {
         this.login = login;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "password")
+    @Basic
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }

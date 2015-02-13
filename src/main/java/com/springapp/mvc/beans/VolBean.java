@@ -1,10 +1,10 @@
-package com.springapp.mvc.beans;
+import javax.persistence.*;
 
 /**
- * Created by Antoine on 06/02/2015.
+ * Created by Antoine on 13/02/2015.
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "vol", schema = "", catalog = "aeroport")
+@Entity
+@Table(name = "vol", schema = "", catalog = "aeroport")
 public class VolBean {
     private int idVol;
     private String lieuDepart;
@@ -13,8 +13,8 @@ public class VolBean {
     private String dateArrivee;
     private String prix;
 
-    @javax.persistence.Id
-    @javax.persistence.Column(name = "idVol")
+    @Id
+    @Column(name = "idVol")
     public int getIdVol() {
         return idVol;
     }
@@ -23,8 +23,8 @@ public class VolBean {
         this.idVol = idVol;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "lieuDepart")
+    @Basic
+    @Column(name = "lieuDepart")
     public String getLieuDepart() {
         return lieuDepart;
     }
@@ -33,8 +33,8 @@ public class VolBean {
         this.lieuDepart = lieuDepart;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "lieuArrivee")
+    @Basic
+    @Column(name = "lieuArrivee")
     public String getLieuArrivee() {
         return lieuArrivee;
     }
@@ -43,8 +43,8 @@ public class VolBean {
         this.lieuArrivee = lieuArrivee;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "dateDepart")
+    @Basic
+    @Column(name = "dateDepart")
     public String getDateDepart() {
         return dateDepart;
     }
@@ -53,8 +53,8 @@ public class VolBean {
         this.dateDepart = dateDepart;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "dateArrivee")
+    @Basic
+    @Column(name = "dateArrivee")
     public String getDateArrivee() {
         return dateArrivee;
     }
@@ -63,8 +63,8 @@ public class VolBean {
         this.dateArrivee = dateArrivee;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "prix")
+    @Basic
+    @Column(name = "prix")
     public String getPrix() {
         return prix;
     }

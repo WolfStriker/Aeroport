@@ -14,15 +14,12 @@ import java.util.Map;
 /**
  * Created by Antoine on 06/02/2015.
  */
-public class Main {
+public class Database {
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
 
     static {
         try {
-
-
-
             Configuration configuration = new Configuration();
             configuration.configure();
 
@@ -37,6 +34,7 @@ public class Main {
         return ourSessionFactory.openSession();
     }
 
+    /*
     public static void main(final String[] args) throws Exception {
         final Session session = getSession();
         try {
@@ -55,4 +53,5 @@ public class Main {
             session.close();
         }
     }
+    */
 }

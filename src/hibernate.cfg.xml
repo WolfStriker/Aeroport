@@ -13,6 +13,15 @@
         <mapping class="UserBean"/>
         <mapping class="VilleBean"/>
         <mapping class="VolBean"/>
+        <mapping class="AeroportBean"/>
+        <mapping class="HotelBean"/>
+        <mapping class="HotelHasPubliciteBean"/>
+        <mapping class="PaysBean"/>
+        <mapping class="PubliciteBean"/>
+        <mapping class="PubliciteHasVolBean"/>
+        <mapping class="UserBean"/>
+        <mapping class="VilleBean"/>
+        <mapping class="VolBean"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

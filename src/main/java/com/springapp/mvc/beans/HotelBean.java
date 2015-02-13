@@ -1,19 +1,18 @@
-package com.springapp.mvc.beans;
+import javax.persistence.*;
 
 /**
- * Created by Antoine on 06/02/2015.
+ * Created by Antoine on 13/02/2015.
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "hotel", schema = "", catalog = "aeroport")
+@Entity
+@Table(name = "hotel", schema = "", catalog = "aeroport")
 public class HotelBean {
     private int idHotel;
     private String nomHotel;
     private Integer etoiles;
     private Integer tarif;
-    private String hotelcol;
 
-    @javax.persistence.Id
-    @javax.persistence.Column(name = "idHotel")
+    @Id
+    @Column(name = "idHotel")
     public int getIdHotel() {
         return idHotel;
     }
@@ -22,8 +21,8 @@ public class HotelBean {
         this.idHotel = idHotel;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "nomHotel")
+    @Basic
+    @Column(name = "nomHotel")
     public String getNomHotel() {
         return nomHotel;
     }
@@ -32,8 +31,8 @@ public class HotelBean {
         this.nomHotel = nomHotel;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "etoiles")
+    @Basic
+    @Column(name = "etoiles")
     public Integer getEtoiles() {
         return etoiles;
     }
@@ -42,24 +41,14 @@ public class HotelBean {
         this.etoiles = etoiles;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "tarif")
+    @Basic
+    @Column(name = "tarif")
     public Integer getTarif() {
         return tarif;
     }
 
     public void setTarif(Integer tarif) {
         this.tarif = tarif;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "hotelcol")
-    public String getHotelcol() {
-        return hotelcol;
-    }
-
-    public void setHotelcol(String hotelcol) {
-        this.hotelcol = hotelcol;
     }
 
     @Override
@@ -71,7 +60,6 @@ public class HotelBean {
 
         if (idHotel != hotelBean.idHotel) return false;
         if (etoiles != null ? !etoiles.equals(hotelBean.etoiles) : hotelBean.etoiles != null) return false;
-        if (hotelcol != null ? !hotelcol.equals(hotelBean.hotelcol) : hotelBean.hotelcol != null) return false;
         if (nomHotel != null ? !nomHotel.equals(hotelBean.nomHotel) : hotelBean.nomHotel != null) return false;
         if (tarif != null ? !tarif.equals(hotelBean.tarif) : hotelBean.tarif != null) return false;
 
@@ -84,7 +72,6 @@ public class HotelBean {
         result = 31 * result + (nomHotel != null ? nomHotel.hashCode() : 0);
         result = 31 * result + (etoiles != null ? etoiles.hashCode() : 0);
         result = 31 * result + (tarif != null ? tarif.hashCode() : 0);
-        result = 31 * result + (hotelcol != null ? hotelcol.hashCode() : 0);
         return result;
     }
 }

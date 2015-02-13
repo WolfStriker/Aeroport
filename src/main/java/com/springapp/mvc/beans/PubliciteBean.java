@@ -1,19 +1,18 @@
-package com.springapp.mvc.beans;
-
+import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * Created by Antoine on 06/02/2015.
+ * Created by Antoine on 13/02/2015.
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "publicite", schema = "", catalog = "aeroport")
+@Entity
+@Table(name = "publicite", schema = "", catalog = "aeroport")
 public class PubliciteBean {
     private int idPublicite;
     private Date dateDiffusion;
     private String heureDiffusion;
 
-    @javax.persistence.Id
-    @javax.persistence.Column(name = "idPublicite")
+    @Id
+    @Column(name = "idPublicite")
     public int getIdPublicite() {
         return idPublicite;
     }
@@ -22,8 +21,8 @@ public class PubliciteBean {
         this.idPublicite = idPublicite;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "dateDiffusion")
+    @Basic
+    @Column(name = "dateDiffusion")
     public Date getDateDiffusion() {
         return dateDiffusion;
     }
@@ -32,8 +31,8 @@ public class PubliciteBean {
         this.dateDiffusion = dateDiffusion;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "heureDiffusion")
+    @Basic
+    @Column(name = "heureDiffusion")
     public String getHeureDiffusion() {
         return heureDiffusion;
     }
