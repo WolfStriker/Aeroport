@@ -20,6 +20,9 @@ public class Main {
 
     static {
         try {
+
+
+
             Configuration configuration = new Configuration();
             configuration.configure();
 
