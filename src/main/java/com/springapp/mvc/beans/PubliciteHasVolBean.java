@@ -7,6 +7,7 @@ import javax.persistence.*;
 /**
  * Created by Antoine on 13/02/2015.
  */
+
 @Entity
 @Table(name = "publicite_has_vol", schema = "", catalog = "aeroport")
 @IdClass(PubliciteHasVolBeanPK.class)
