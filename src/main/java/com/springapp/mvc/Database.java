@@ -18,6 +18,7 @@ public class Database {
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
 
+
     static {
         try {
             Configuration configuration = new Configuration();
