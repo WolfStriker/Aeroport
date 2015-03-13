@@ -29,7 +29,7 @@
 
 <script>
     var xmlhttp = new XMLHttpRequest();
-    var url = "http://localhost:8080/api/test";
+    var url = "http://localhost:8080/Aeroport/api/test";
 
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
