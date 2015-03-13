@@ -28,7 +28,7 @@ angular.module('app', ['ionic'])
     }
   });
   
-  $urlRouterProvider.otherwise('/tabs/twitts');
+  $urlRouterProvider.otherwise('/tabs/vols');
 })
 
 .run(function($ionicPlatform) {
