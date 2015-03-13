@@ -1,35 +1,63 @@
-<html>
+<html ng-app>
 <head>
 	<title>Panneau publicitaire vols</title>
+	
+	 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	
+	<script type="text/javascript">
+	    function PubController($scope, $http)
+	    {
+	    	$scope.villeDest = "New York";
+	    	$scope.prixVol = "666";
+	    	$scope.villeDepart = "Paris"
+	    	$scope.imageVilleDest = "../../../img/new-york-city-times-square.pjg"; 
+	    	$scope.dateDepart = "13/07/2022";
+	    	
+	    	
+	    	$scope.hotels = [];
+	    	$scope.hotels.push({
+	    		nomHotel 	: "SuperHotelDeOufMalade",
+	    		prixParNuit : "2",
+	    		image		: "../../../img/vert.png"
+			});
+	    	$scope.hotels.push({
+	    		nomHotel 	: "HotelTropTropTropNul",
+	    		prixParNuit : "30",
+	    		image		: "../../../img/vert.png"
+			});
+	    }
+    </script>
+    
+    
 </head>
-<body>
+<body ng-controller="PubController">
 	<table width="100%" height="100%">
 		<tr height="10%">
-			<td BACKGROUND="ressources/vert.png">toto</td>
+			<td BACKGROUND="../../../img/vert.png">{{villeDest}}</td>
 		</tr>
 		
 		<tr height="50%">
-			<td BACKGROUND="ressources/gris_clair.png">
+			<td BACKGROUND="../../../img/gris_clair.png">
 				<table width="100%" height="100%">
 					<tr>
 						<td width="40%">
 							<table width="100%" height="100%">
 								<tr height="50%">
-									<td BACKGROUND="ressources/vert.png">caca </td>
+									<td BACKGROUND="../../../img/vert.png">caca </td>
 								</tr>
 								<tr height="50%">
-									<td BACKGROUND="ressources/vert.png">prout</td>
+									<td BACKGROUND="../../../img/vert.png">prout</td>
 								</tr>
 							</table>
 						</td>
-						<td width="60%" ><img src="ressources/new-york-city-times-square.jpg" width="100%" height="100%"></img></td>
+						<td width="60%" ><img src="../../../img/new-york-city-times-square.jpg" width="100%" height="100%"></img></td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 		
 		<tr height="40%">
-			<td BACKGROUND="ressources/gris_fonce.png">toto</td>
+			<td BACKGROUND="../../../img/gris_fonce.png">toto</td>
 		</tr>
 	
 	</table>
