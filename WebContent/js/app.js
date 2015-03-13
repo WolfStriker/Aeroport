@@ -27,7 +27,6 @@ angular.module('app', ['ionic'])
       }
     }
   });
-  
   $urlRouterProvider.otherwise('/tabs/vols');
 })
 
