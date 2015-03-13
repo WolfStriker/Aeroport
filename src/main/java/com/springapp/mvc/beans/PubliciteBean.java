@@ -1,3 +1,5 @@
+package com.springapp.mvc.beans;
+
 import javax.persistence.*;
 import java.sql.Date;
 

@@ -11,12 +11,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/")
 public class HelloController {
+	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String showForm(){
+		return "home";
+	}
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
-		model.addAttribute("message", "Toto va Ã  l'Ã©cole!");
-		return "hello";
+		model.addAttribute("message", "Toto va à  l'école!");
+		return "index";
 	}
 
     @RequestMapping(method = RequestMethod.HEAD)
@@ -28,7 +33,6 @@ public class HelloController {
     public String testJSON(ModelMap model) throws JSONException {
 
         Database db;
-
         JSONArray array = new JSONArray();
         JSONObject o = new JSONObject();
         o.put("id", "1");
