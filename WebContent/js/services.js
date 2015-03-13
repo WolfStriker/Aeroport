@@ -1,5 +1,6 @@
 angular.module('app')
 
+
 .factory('UserSrv', function($q){
   'use strict';
   var service = {

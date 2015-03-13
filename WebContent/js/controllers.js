@@ -1,5 +1,6 @@
 angular.module('app')
 
+
 .controller('TabsCtrl', function($scope, $ionicModal, $ionicPopover, $timeout, LoginEventDispatcher){
   'use strict';
   
