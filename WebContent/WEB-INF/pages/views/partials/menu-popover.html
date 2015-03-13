@@ -1,0 +1,16 @@
+<ion-popover-view ng-controller="LoginCtrl">
+  <ion-content>
+    <div class="list" ng-click="popover.hide()">
+      <a class="item item-avatar" ui-sref="tabs.profil">
+        <img ng-src="{{user.avatar}}">
+        <h2>{{user.name}}</h2>
+        <p>@{{user.id}}</p>
+      </a>
+    </div>
+	<form ng-submit="logoff()">
+	    <div class="padding">
+	    	<button type="submit" class="button button-block button-positive">Déconnexion</button>
+	    </div>
+    </form>
+  </ion-content>
+</ion-popover-view>

@@ -1,0 +1,73 @@
+<ion-modal-view>
+ <!-- Modal header bar -->
+		    <ion-header-bar class="bar-secondary">
+		      <h1 class="title">Nouveau vol</h1>
+		      <button class="button button-clear button-positive" ng-click="closeNewVol()">Annuler</button>
+		    </ion-header-bar>
+		
+		    <!-- Modal content area -->
+		    <ion-content>
+		
+		      <form ng-submit="createVol(vol)">
+		        <div class="list">
+
+				  <label class="item item-input item-select">
+    				<div class="input-label">
+      					Ville de départ :
+    				</div>
+    				<select ng-model="vol.villeDepart" requires>
+      					<option>Paris</option>
+      					<option>Londres</option>
+      					<option>Madrid</option>
+						<option>Lisbonne</option>
+						<option>Copenhague</option>
+						<option>Rome</option>
+    				</select>
+  				  </label>
+
+				  <label class="item item-input item-select">
+    				<div class="input-label">
+      					Destination :
+    				</div>
+    				<select ng-model="vol.villeArrivee" required>
+      					<option>Paris</option>
+      					<option>Londres</option>
+      					<option>Madrid</option>
+						<option>Lisbonne</option>
+						<option>Copenhague</option>
+						<option>Rome</option>
+    				</select>
+  				  </label>
+
+				  <label class="item item-input">
+					Date de départ : 
+					<input type="date" ng-model="vol.dateDepart" required>
+				  </label>
+
+				  <label class="item item-input">
+					Heure de départ : 
+					<input type="time" ng-model="vol.heureDepart" required>
+				  </label>
+
+				  <label class="item item-input">
+					Date d'arrivée :
+					<input type="date" ng-model="vol.dateArrivee" required>
+				  </label>
+
+				  <label class="item item-input">
+					Heure d'arrivée : 
+					<input type="time" ng-model="vol.heureArrivee" required>
+				  </label>
+
+				  <label class="item item-input">
+					Prix : 
+		            <input type="text" placeholder="saisissez le prix du vol" ng-model="vol.prix" required>
+		          </label>
+		        </div>
+		        <div class="padding">
+		          <button type="submit" class="button button-block button-positive">Ajouter Vol</button>
+		        </div>
+		      </form>
+		
+		    </ion-content>
+</ion-modal-view>

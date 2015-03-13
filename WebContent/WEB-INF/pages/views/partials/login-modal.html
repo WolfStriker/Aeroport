@@ -1,0 +1,24 @@
+<ion-modal-view ng-controller="LoginCtrl">
+
+	<ion-header-bar class="bar-secondary">
+		<h1 class="title">Connexion</h1>
+	</ion-header-bar>
+	
+	<ion-content>
+		<form ng-submit="connexion(identifiants)">
+			<div class="list">
+	
+	  			<label class="item item-input">
+	    			<input type="text" placeholder="Login" required ng-model="identifiants.login">
+	  			</label>
+	
+	  			<label class="item item-input">
+	    			<input type="password" placeholder="Mot de passe" required ng-model="identifiants.password">
+	  			</label>
+	
+	  				<button class="button button-block button-positive">Connexion</button>
+			</div>
+		</form>
+	</ion-content>
+	
+</ion-modal-view>
