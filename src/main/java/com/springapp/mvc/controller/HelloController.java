@@ -43,10 +43,10 @@ public class HelloController {
     	for(VolBean v : l){
     		JSONObject o = new JSONObject();
     		o.put("id", v.getIdVol());
-    		o.put("lieuDepart", v.getLieuDepart());
-    		o.put("lieuArrive", v.getLieuArrivee());
-    		o.put("depart", v.getDateDepart());
-    		o.put("arrivee", v.getDateArrivee());
+    		o.put("villeDepart", v.getLieuDepart());
+    		o.put("villeArrivee", v.getLieuArrivee());
+    		o.put("dateDepart", v.getDateDepart());
+    		o.put("dateArrivee", v.getDateArrivee());
     		o.put("prix", v.getPrix());
     		array.put(o);
     	}
