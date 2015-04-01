@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import org.springframework.stereotype.Service;
@@ -75,27 +76,25 @@ public class Dao<T> {
 
     public boolean delete(T clazz){
         if(clazz != null){
-            Database.openSession();
-            Database.getSession().beginTransaction();
-            Database.getSession().delete(clazz);
-            Database.getSession().getTransaction().commit();
-            Database.closeSession();
-            return true;
+           EntityTransaction tx = manager.getTransaction();
+           tx.begin();
+           manager.remove(clazz);
+           tx.commit();
+           return true;
         }
         return false;
 
     }
 
-    public String save(T clazz){
+    public boolean save(T clazz){
         if(clazz != null){
-            Database.openSession();
-            Database.getSession().beginTransaction();
-            Database.getSession().save(clazz);
-            Database.getSession().getTransaction().commit();
-            Database.closeSession();
-            return clazz.toString();
+        	EntityTransaction tx = manager.getTransaction();
+    		tx.begin();
+    		manager.persist(clazz);
+    		tx.commit();
+            return true;
         }
-        return null;
+        return false;
     }
 
     @SuppressWarnings("unchecked")

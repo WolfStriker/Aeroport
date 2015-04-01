@@ -38,7 +38,16 @@ angular.module('app')
      * @return l'id du vol ajouté
      */
     addVol: function(vol){
-//      // appel au service d'ajout d'un vol
+//      
+    	var promise = $http.put('http://localhost:8080/Aeroport/ajouterVol.htm', vol).then(function (response) {
+            console.log(response);
+            return response.data;
+          });
+    	
+    	return promise;
+    	
+    	
+    	// appel au service d'ajout d'un vol
 //      $http({
 //          method: 'POST',
 //          url: 'http://localhost:8080/Aeroport/api/addVol.html',
@@ -48,7 +57,7 @@ angular.module('app')
 //  	  {
 //      	  console.log(result);
 //      });
-    	return $q.when({id: 0});
+    	//return $q.when({id: 0});
     }
   };
 

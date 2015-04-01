@@ -75,12 +75,10 @@ angular.module('app')
     	var _dateArrivee = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
     
 	    var data = {
-			villeDepart :	vol.villeDepart,
-			villeArrivee:	vol.villeArrivee,
+			lieuDepart :	vol.villeDepart,
+			lieuArrivee:	vol.villeArrivee,
 			dateDepart  :	_dateDepart,
-			heureDepart : 	vol.heureDepart,
 			dateArrivee :	_dateArrivee,
-			heureArrivee: 	vol.heureArrive,
 			prix		:	vol.prix
 	    };
 	    
