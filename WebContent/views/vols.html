@@ -2,17 +2,16 @@
 
 	<ion-header-bar class="bar-positive">
 		<!-- Delete button -->
-	    <button class="button button-icon icon ion-minus-circled" 
-  			ng-click="data.showDelete = !data.showDelete; data.showReorder = false">
-		</button>
+	    <button class="button button-icon icon ion-minus-circled" ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
 	    
 	    <!-- New Task button-->
-	    <button class="button button-icon icon ion-plus-circled" ng-click="newVol()">
-	    </button>
+	    <button class="button button-icon icon ion-plus-circled" ng-click="newVol()"></button>
 	    
 		<h1 class="title">Gestion des vols</h1>
-		
-		<button class="button button-icon ion-android-person" ng-click="popover.show($event)"></button>
+		<div class="buttons">
+			<button class="button button-icon ion-eye" ng-click="showPub()"></button>
+			<button class="button button-icon ion-android-person" ng-click="popover.show($event)"></button>
+		</div>
 	</ion-header-bar>
 	
 	<ion-content scroll="true">

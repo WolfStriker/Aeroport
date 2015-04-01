@@ -26,6 +26,15 @@ angular.module('app', ['ionic'])
         controller: 'HotelsCtrl'
       }
     }
+  })
+  .state('tabs.pub', {
+    url: '/pub',
+    views: {
+      'pub-tab': {
+        templateUrl: 'views/pub.html',
+        controller: 'PubCtrl'
+      }
+    }
   });
   $urlRouterProvider.otherwise('/tabs/vols');
 })
@@ -41,3 +50,4 @@ angular.module('app', ['ionic'])
     }
   });
 });
+

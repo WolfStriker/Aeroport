@@ -1,6 +1,5 @@
 angular.module('app')
 
-
 .controller('TabsCtrl', function($scope, $ionicModal, $ionicPopover, $timeout, LoginEventDispatcher){
   'use strict';
   
@@ -27,7 +26,6 @@ angular.module('app')
   		console.log("Déconnexion !");
   		$scope.loginModal.show();
   	});
-
 })
 
 .controller('HotelsCtrl', function($scope, $ionicModal, $ionicPopover){
@@ -43,7 +41,7 @@ angular.module('app')
 
 })
 
-.controller('VolsCtrl', function($scope, $http,  $timeout, $ionicModal, $ionicPopover, $ionicSideMenuDelegate){
+.controller('VolsCtrl', function($scope, $http,  $timeout, $ionicModal, $ionicPopover, $ionicSideMenuDelegate, VolsSrv){
   'use strict';
   
   	$scope.data = {
@@ -52,41 +50,22 @@ angular.module('app')
   	};
   
   	$scope.vols = [];
-  
+  	
+  	$scope.showPub = function(){
+  		window.open("views/pub.html",'_blank');
+  	};
+  	
 	var getVols = function(){
-			// appel au service
-	        /*$http({
-	            method: 'POST',
-	            url: 'http://localhost:8080/Aeroport/api/test',
-	            headers: {'Content-Type': 'application/json'}
-	    	  }).success(function (data) 
-	    	  {
-	        	  console.log(data);
-	        });*/
-	       
-		$scope.vols.push({
-			villeDepart :	"Paris",
-			villeArrivee:	"Madrid",
-			dateDepart  :	"12/05/2016",
-			heureDepart : 	"10h30",
-			dateArrivee :	"12/05/2016",
-			heureArrivee: 	"10h31",
-			prix		  : "3"
+	  	VolsSrv.getVols().then(function(result){
+			console.log("Résultat de la récupération des vols : ");
+			console.log(result.vols);
+			$scope.vols = result.vols;
 		});
-		
-		$scope.vols.push({
-			villeDepart :	"Paris",
-			villeArrivee:	"Londre",
-			dateDepart  :	"13/06/2020",
-			heureDepart : 	"11h20",
-			dateArrivee :	"13/06/2020",
-			heureArrivee: 	"23h20",
-			prix		  : "445"
-		});
-        
     };
     
 	$scope.createVol = function(vol) {
+		console.log("VolsCtrl : createVol");
+		
 	    if(!vol) { return; }
     
     	var date = new Date(vol.dateDepart);
@@ -95,43 +74,26 @@ angular.module('app')
     	date = new Date(vol.dateArrivee);
     	var _dateArrivee = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
     
-	    // ajout des données
-	    // ici en local, plus tard via l'API java
-	    $scope.vols.push({
-	    	villeDepart :	vol.villeDepart,
-	    	villeArrivee:	vol.villeArrivee,
-	    	dateDepart  :	_dateDepart,
-	    	heureDepart : 	vol.heureDepart,
-	    	dateArrivee :	_dateArrivee,
-	    	heureArrivee: 	vol.heureArrive,
-	    	prix		: 	vol.prix
-	    });
+	    var data = {
+			villeDepart :	vol.villeDepart,
+			villeArrivee:	vol.villeArrivee,
+			dateDepart  :	_dateDepart,
+			heureDepart : 	vol.heureDepart,
+			dateArrivee :	_dateArrivee,
+			heureArrivee: 	vol.heureArrive,
+			prix		:	vol.prix
+	    };
 	    
-	    // on cache le modal d'ajout de vol
+	    $scope.vols.push(vol);
+	    
+	    VolsSrv.addVol(vol).then(function(result){
+			console.log("Ajout d'un vol OK");
+			console.log("Id du vol :" + result.id);
+			getVols();
+		});
+	    
+	 // on cache le modal d'ajout de vol
 	    $scope.newVolModal.hide();
-    
-//    var data = {
-//		  villeDepart :	vol.villeDepart,
-//		  villeArrivee:	vol.villeArrivee,
-//		  dateDepart  :	_dateDepart,
-//		  heureDepart : vol.heureDepart,
-//		  dateArrivee :	_dateArrivee,
-//		  heureArrivee: vol.heureArrive,
-//		  prix		  : vol.prix
-//    };
-//    
-//    // appel au service d'enregistrement d'un vol
-//    $http({
-//        method: 'POST',
-//        url: 'http://localhost:8080/Aeroport/api/addVol',
-//        headers: {'Content-Type': 'application/json'},
-//        data: data
-//	  }).success(function (_data) 
-//	  {
-//    	  console.log(_data);
-//		  console.log("Vol enregistré !")
-//    });
-
   	};
     
     $scope.newVol = function() {
@@ -152,7 +114,7 @@ angular.module('app')
 	};
 	
 	$scope.editVol = function(vol) {
-		//$scope.editVolModal.show();
+		$scope.editVolModal.show();
 	};
   	
   	// Creation du modal d'ajout d'un vol
@@ -166,8 +128,6 @@ angular.module('app')
 		hardwareBackButtonClose: false
   	});
   	
-
-	  
 	$ionicPopover.fromTemplateUrl('views/partials/menu-popover.html', {
     	scope: $scope,
   	}).then(function(popover) {
@@ -183,7 +143,11 @@ angular.module('app')
   	$timeout(function() {
   		getVols();
   	});
-  	
+})
+
+.controller('PubCtrl', function($scope) {
+	
+
 })
 
 .controller('LoginCtrl', function($scope, $http, $state, $ionicPopup, UserSrv, LoginEventDispatcher) {
@@ -198,16 +162,6 @@ angular.module('app')
 	    	$scope.connected = true;
 	    	$scope.loginModal.hide();
 	    	console.log("Authentification réussie.");
-	
-	 		// appel au service
-			$http({
-			    method: 'POST',
-			    url: 'http://localhost:8080/Aeroport/api/test',
-			    headers: {'Content-Type': 'application/json'}
-			  }).success(function (data) 
-			  {
-				  console.log(data);
-			});
 		}
 		else
 		{
@@ -227,7 +181,6 @@ angular.module('app')
 	UserSrv.getUser().then(function(user){
 		$scope.user = user;
 	});
-	  
 })
 
 ;
