@@ -58,8 +58,8 @@ angular.module('app')
 	var getVols = function(){
 	  	VolsSrv.getVols().then(function(result){
 			console.log("Résultat de la récupération des vols : ");
-			console.log(result.vols);
-			$scope.vols = result.vols;
+			console.log(result);
+			$scope.vols = result;
 		});
     };
     

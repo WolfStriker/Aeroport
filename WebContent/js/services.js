@@ -15,6 +15,7 @@ angular.module('app')
 .factory('VolsSrv', function($q, $http){
   'use strict';
   var volsSrv = {
+		  
 	/**
 	 * Récupère la liste des vols
 	 * @return la liste des vols
@@ -23,38 +24,12 @@ angular.module('app')
     	console.log("VolsSrv : getVols");
     	var vols = [];
     	
-    	// appel au service
-    	$http({
-    	  method: 'GET',
-    	  url: 'http://localhost:8080/Aeroport/vols.htm',
-    	  headers: {'Content-Type': 'application/json'}
-    	}).success(function (data) 
-    	{
-    		  console.log(data);
-    		  vols = data;
-    	});
+    	var promise = $http.get('http://localhost:8080/Aeroport/vols.htm').then(function (response) {
+            console.log(response);
+            return response.data;
+          });
     	
-//    	vols.push({
-//	    	villeDepart :	"Paris",
-//	    	villeArrivee:	"Madrid",
-//	    	dateDepart  :	"12/05/2016",
-//	    	heureDepart : 	"10h30",
-//	    	dateArrivee :	"12/05/2016",
-//	    	heureArrivee: 	"10h31",
-//	    	prix		  : "3"
-//    	});
-//    	
-//    	vols.push({
-//	    	villeDepart :	"Paris",
-//	    	villeArrivee:	"Londre",
-//	    	dateDepart  :	"13/06/2020",
-//	    	heureDepart : 	"11h20",
-//	    	dateArrivee :	"13/06/2020",
-//	    	heureArrivee: 	"23h20",
-//	    	prix		  : "445"
-//    	});
-    	
-      return $q.when({vols: vols});
+    	return promise;
     },
     
     /**
@@ -96,3 +71,38 @@ angular.module('app')
 })
 
 ;
+
+
+//vols.push({
+//villeDepart :	"Paris",
+//villeArrivee:	"Madrid",
+//dateDepart  :	"12/05/2016",
+//heureDepart : 	"10h30",
+//dateArrivee :	"12/05/2016",
+//heureArrivee: 	"10h31",
+//prix		  : "3"
+//});
+//
+//vols.push({
+//villeDepart :	"Paris",
+//villeArrivee:	"Londre",
+//dateDepart  :	"13/06/2020",
+//heureDepart : 	"11h20",
+//dateArrivee :	"13/06/2020",
+//heureArrivee: 	"23h20",
+//prix		  : "445"
+//});
+
+//// appel au service
+//$http({
+//method: 'GET',
+//url: 'http://localhost:8080/Aeroport/api/test.htm',
+//headers: {'Content-Type': 'application/json'}
+//}).success(function (data) 
+//{
+//  console.log(data);
+//  vols = data;
+//  return $q.when({vols: data});
+//});
+
+//return $q.when({vols: vols});
