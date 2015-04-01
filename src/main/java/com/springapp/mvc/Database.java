@@ -31,8 +31,17 @@ public class Database {
         }
     }
 
+    public static void openSession() throws HibernateException {
+        ourSessionFactory.openSession();
+    }
+
+    public static void closeSession() throws HibernateException {
+        ourSessionFactory.getCurrentSession().flush();
+        ourSessionFactory.getCurrentSession().close();
+    }
+
     public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
+        return ourSessionFactory.getCurrentSession();
     }
 
     /*

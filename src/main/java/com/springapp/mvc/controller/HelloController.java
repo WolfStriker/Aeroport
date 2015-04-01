@@ -1,6 +1,11 @@
 package com.springapp.mvc.controller;
 
+import java.util.List;
+
 import com.springapp.mvc.Database;
+import com.springapp.mvc.beans.VolBean;
+import com.springapp.mvc.dao.Dao;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +31,26 @@ public class HelloController {
 
     @RequestMapping(method = RequestMethod.HEAD)
     public void printHead(){
+    }
+    
+    @RequestMapping(value = "/vols", method = RequestMethod.POST)
+    @ResponseBody
+    public String getVols() throws JSONException{
+    	Dao<VolBean> dao = new Dao<VolBean>();
+    	List<VolBean> l = dao.selectAll(new VolBean());
+    	JSONArray array = new JSONArray();
+    	
+    	for(VolBean v : l){
+    		JSONObject o = new JSONObject();
+    		o.put("id", v.getIdVol());
+    		o.put("lieuDepart", v.getLieuDepart());
+    		o.put("lieuArrive", v.getLieuArrivee());
+    		o.put("depart", v.getDateDepart());
+    		o.put("arrivee", v.getDateArrivee());
+    		o.put("prix", v.getPrix());
+    		array.put(o);
+    	}
+    	return array.toString();
     }
 
     @RequestMapping(value = "/api/test", method = RequestMethod.GET)
