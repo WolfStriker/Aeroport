@@ -35,30 +35,11 @@ public class Dao<T> {
         	list = (ArrayList<T>) manager.createQuery("from VolBean").getResultList();
         	return list;
         }
-        /*
-        Database.openSession();
-        if(clazz instanceof AeroportBean){
-            list = (ArrayList<T>) Database.getSession().createQuery("from aeroport").list();
-            return list;
-        }
-        else if(clazz instanceof VolBean){
-            list = (ArrayList<T>) Database.getSession().createQuery("from vol").list();
-            return list;
-        }
         else if(clazz instanceof HotelBean){
-        	list = (ArrayList<T>) Database.getSession().createQuery("from hotel").list();
+        	list = (ArrayList<T>) manager.createQuery("from HotelBean").getResultList();
         	return list;
         }
-        else if(clazz instanceof VilleBean){
-            list = (ArrayList<T>) Database.getSession().createQuery("from ville").list();
-            return list;
-        }
-        else if(clazz instanceof UserBean){
-            list = (ArrayList<T>) Database.getSession().createQuery("from user").list();
-            return list;
-        }
-        Database.closeSession();
-        */
+        
         return null;
 
     }
