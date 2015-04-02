@@ -28,7 +28,7 @@ angular.module('app')
   	});
 })
 
-.controller('HotelsCtrl', function($scope, $ionicModal, $ionicPopover){
+.controller('HotelsCtrl', function($scope, $ionicModal, $ionicPopover, $timeout, HotelsSrv){
   'use strict';
 
   
@@ -37,7 +37,85 @@ angular.module('app')
   }).then(function(popover) {
     $scope.popover = popover;
   });
+  
+	$scope.hotels = [];
 
+	$scope.showPub = function(){
+  		window.open("views/pub.html",'_blank');
+  	};
+  	
+  	var getHotels = function(){
+  		HotelsSrv.getHotels().then(function(result){
+			console.log("Résultat de la récupération des hotels : ");
+			console.log(result);
+			$scope.hotels = result;
+		});
+    };
+    
+	$scope.createHotel = function(hotel) {
+		console.log("HotelsCtrl : createHotel");
+		
+	    if(!hotel) { return; }
+    
+	    var data = {
+			nom 	:		hotel.nom,
+			etoiles	:		hotel.etoiles,
+			prix	:		hotel.prix
+	    };
+	    
+	    HotelsSrv.addHotel(data).then(function(result){
+			getHotels();
+		});
+	    
+	 // on cache le modal d'ajout de vol
+	    $scope.newHotelModal.hide();
+  	};
+    
+    $scope.newHotel = function() {
+    	$scope.newHotelModal.show();
+  	};
+  	
+  	$scope.closeNewHotel = function() {
+    	$scope.newHotelModal.hide();
+  	};
+  	
+  	// Creation du modal d'ajout d'un hotel
+  	$ionicModal.fromTemplateUrl('views/partials/new-hotel-modal.html', function(modal) {
+    	$scope.newHotelModal = modal;
+  	}, {
+	  	scope: $scope,
+	  	animation: 'slide-in-up',
+	  	focusFirstInput: true,
+	  	backdropClickToClose: false,
+		hardwareBackButtonClose: false
+  	});
+  	
+  	$scope.onHotelDelete = function(hotel) {
+  		if(!hotel) { return; }
+  		
+  		var idHotel = hotel.id;
+  		
+  		HotelsSrv.deleteHotel(idHotel).then(function(result){
+			getHotels();
+		});
+  		
+		var i = 0;
+		for(i; i<$scope.hotels.length; i++)
+		{	
+			if($scope.hotels[i] === hotel)
+				$scope.hotels.splice(i,1);
+		}
+	};
+    
+    $scope.doRefresh = function(){
+    	getHotels();
+      	// Stop the ion-refresher from spinning
+      	$scope.$broadcast('scroll.refreshComplete');
+  	};
+    
+    $timeout(function() {
+    	getHotels();
+  	});
 
 })
 
@@ -82,11 +160,7 @@ angular.module('app')
 			prix		:	vol.prix
 	    };
 	    
-	    $scope.vols.push(vol);
-	    
 	    VolsSrv.addVol(data).then(function(result){
-			console.log("Ajout d'un vol OK");
-			console.log("Id du vol :" + result.id);
 			getVols();
 		});
 	    
@@ -103,6 +177,14 @@ angular.module('app')
   	};
   	
   	$scope.onVolDelete = function(vol) {
+  		if(!vol) { return; }
+  		
+  		var idVol = vol.id;
+  		
+  		VolsSrv.deleteVol(idVol).then(function(result){
+			getVols();
+		});
+  		
 		var i = 0;
 		for(i; i<$scope.vols.length; i++)
 		{	
@@ -133,22 +215,6 @@ angular.module('app')
   	});
 
     $scope.doRefresh = function(){
-    	
-    	var data = {};
-    	    
-
-		data.lieuDepart = "Paris";
-		data.lieuArrivee = "Londres";
-		data.dateDepart = "01/02/2015";
-		data.dateArrivee = "01/02/2015";
-		data.prix = "15";
-    
-    	    VolsSrv.addVol(data).then(function(result){
-    			console.log("Ajout d'un vol OK");
-    			console.log("Id du vol :" + result.id);
-    			getVols();
-    		});
-    	
     	getVols();
       	// Stop the ion-refresher from spinning
       	$scope.$broadcast('scroll.refreshComplete');

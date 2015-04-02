@@ -78,6 +78,7 @@ public class Dao<T> {
         if(clazz != null){
            EntityTransaction tx = manager.getTransaction();
            tx.begin();
+           clazz = manager.merge(clazz);
            manager.remove(clazz);
            tx.commit();
            return true;

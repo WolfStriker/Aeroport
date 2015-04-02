@@ -7,15 +7,11 @@ import com.springapp.mvc.beans.HotelBean;
 import com.springapp.mvc.beans.VolBean;
 import com.springapp.mvc.dao.Dao;
 
-
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,7 +74,7 @@ public class HelloController {
     
     @RequestMapping(value="/ajouterVol", method=RequestMethod.GET)
     @ResponseBody
-    public VolBean enregistrerClient(@RequestParam("lieuDepart") String lieudepart, 
+    public VolBean enregistrerVol(@RequestParam("lieuDepart") String lieudepart, 
     		@RequestParam("lieuArrivee") String lieuarrivee,
     		@RequestParam("dateDepart") String datedepart,
     		@RequestParam("dateArrivee") String datearrivee,
@@ -103,20 +99,29 @@ public class HelloController {
 	}
     
     @RequestMapping(value="/ajouterHotel", method = RequestMethod.GET)
-    public String addHotel(@RequestBody HotelBean hotel){
+    @ResponseBody
+    public HotelBean enregistrerHotel(@RequestParam("nom") String nom, 
+    		@RequestParam("etoile") int etoile,
+    		@RequestParam("prix") int prix){
+    	
+    	HotelBean hotel = new HotelBean();
+    	hotel.setNomHotel(nom);
+    	hotel.setEtoiles(etoile);
+    	hotel.setTarif(prix);
+    	
     	Dao<HotelBean> dao = new Dao<HotelBean>();
+    	
+    	
     	if(dao.save(hotel)){
-    		return "success";
+    		return hotel;
     	}
-    	else{
-    		return "failed";
-    	}
+    	return null;
     }
     
     @RequestMapping(value="/supprimerVol", method = RequestMethod.GET)
-    public String deleteVol(@RequestParam("id") String id){
+    public String deleteVol(@RequestParam("id") int id){
     	VolBean vol = new VolBean();
-    	vol.setIdVol(Integer.parseInt(id));
+    	vol.setIdVol(id);
     	
     	Dao<VolBean> dao = new Dao<VolBean>();
     	if(dao.delete(vol)){
@@ -128,9 +133,9 @@ public class HelloController {
     }
     
     @RequestMapping(value="/supprimerHotel", method = RequestMethod.GET)
-    public String deleteHotel(@RequestParam("id") String id){
+    public String deleteHotel(@RequestParam("id") int id){
     	HotelBean hotel = new HotelBean();
-    	hotel.setIdHotel(Integer.parseInt(id));
+    	hotel.setIdHotel(id);
     	
     	Dao<HotelBean> dao = new Dao<HotelBean>();
     	if(dao.delete(hotel)){
@@ -160,10 +165,5 @@ public class HelloController {
         o.put("email", "toto@tata.com");
         array.put(o);
         return array.toString();
-    }
-    
-    public class Test{
-    	public String a;
-    	public String b;
     }
 }

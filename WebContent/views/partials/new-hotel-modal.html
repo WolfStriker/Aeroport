@@ -1,0 +1,36 @@
+<ion-modal-view>
+
+ <!-- Modal header bar -->
+		    <ion-header-bar class="bar-secondary">
+		      <h1 class="title">Nouvel hotel</h1>
+		      <button class="button button-clear button-positive" ng-click="closeNewHotel()">Annuler</button>
+		    </ion-header-bar>
+		
+		    <!-- Modal content area -->
+		    <ion-content>
+		
+		      <form ng-submit="createHotel(hotel)">
+		        <div class="list">
+
+				<label class="item item-input">
+					Nom de l'hotel : 
+		            <input type="text" placeholder="Saisissez le nom de l'hotel" ng-model="hotel.nom" required>
+		          </label>
+		          
+		          <label class="item item-input">
+					Nombre d'etoiles : 
+		            <input type="text" placeholder="Saisissez le nombre d'etoiles de l'hotel" ng-model="hotel.etoiles" required>
+		          </label>
+		          
+				  <label class="item item-input">
+					Prix : 
+		            <input type="text" placeholder="Saisissez le prix de l'hotel / nuit" ng-model="hotel.prix" required>
+		          </label>
+		        </div>
+		        <div class="padding">
+		          <button type="submit" class="button button-block button-positive">Ajouter Hotel</button>
+		        </div>
+		      </form>
+		
+		    </ion-content>
+</ion-modal-view>

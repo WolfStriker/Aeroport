@@ -1,16 +1,27 @@
 <ion-view>
 
-  <ion-header-bar class="bar-positive">
-    <h1 class="title">...</h1>
-    <div class="buttons">
-   	  <button class="button button-icon ion-eye" ng-click="popover.show($event)"></button>
-      <button class="button button-icon ion-android-person" ng-click="popover.show($event)"></button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
-    <ion-refresher pulling-text="Tirer pour actualiser..." on-refresh="doRefresh()"></ion-refresher>
-    <div class="list">
-      
-    </div>
-  </ion-content>
+	<ion-header-bar class="bar-positive">
+		<!-- Delete button -->
+	    <button class="button button-icon icon ion-minus-circled" ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
+	    
+	    <!-- New Vol button-->
+	    <button class="button button-icon icon ion-plus-circled" ng-click="newHotel()"></button>
+	
+    	<h1 class="title">Gestion des hotels</h1>
+    	<div class="buttons">
+   	  		<button class="button button-icon ion-eye" ng-click="popover.show($event)"></button>
+      		<button class="button button-icon ion-android-person" ng-click="popover.show($event)"></button>
+    	</div>
+	</ion-header-bar>
+	<ion-content scroll="true">
+		<ion-refresher pulling-text="Tirer pour actualiser..." on-refresh="doRefresh()"></ion-refresher>
+		<ion-list show-delete="data.showDelete" show-reorder="data.showReorder" show-option="date.showOption">
+      		<ion-item ng-repeat="hotel in hotels" hotel="hotel" class="item-remove-animate">
+	        	<b>{{hotel.nom}}</b> - {{hotel.etoiles}} etoiles - a partir de <b>{{hotel.prix}}€/nuit</b>
+	        	
+	        	<ion-delete-button class="ion-minus-circled" ng-click="onHotelDelete(hotel)"></ion-delete-button><!-- delete -->
+	        	<ion-option-button class="ion-edit" ng-click="editHotel(hotel)"></ion-option-button><!-- edit -->
+	     	</ion-item>
+	    </ion-list>
+	</ion-content>
 </ion-view>

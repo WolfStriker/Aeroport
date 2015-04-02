@@ -35,31 +35,99 @@ angular.module('app')
     /**
      * Ajoute un vol
      * @param le vol à ajouter
-     * @return l'id du vol ajouté
+     * @return le vol ajouté
      */
     addVol: function(vol){
     	
-    	/*
-    	var promise = $http.post('ajouterVol.htm', {vol: vol});
+    	var promise = $http.get('ajouterVol.htm', {params: {lieuDepart: vol.lieuDepart, lieuArrivee: vol.lieuArrivee, dateDepart: vol.dateDepart, dateArrivee: vol.dateArrivee, prix: vol.prix}}).then(function (response) {
+            console.log(response);
+            return response.data;
+          });
+    	
+//    	var promise = $http({
+//	      method: 'GET',
+//	      url: 'ajouterVol.htm',
+//	      params: {lieuDepart: vol.lieuDepart, lieuArrivee: vol.lieuArrivee, dateDepart: vol.dateDepart, dateArrivee: vol.dateArrivee, prix: vol.prix}
+//	    }).then(function (response) {
+//            console.log(response);
+//            return response.data;
+//          });
     	
     	return promise;
-    	*/
-    	
-    	// appel au service d'ajout d'un vol
-    	
-    	$http({
-	      method: 'GET',
-	      url: 'ajouterVol.htm',
-	      params: {lieuDepart: vol.lieuDepart, lieuArrivee: vol.lieuArrivee, dateDepart: vol.dateDepart, dateArrivee: vol.dateArrivee, prix: vol.prix}
-	    }).success(function (result) {
-  	  		console.log(result);
-		});
+    },
+    
+    /**
+     * Supprime un vol
+     * @param l'id du vol à supprimer
+     * @return 
+     */
+    deleteVol: function(idVol){
+    	var promise = $http({
+  	      method: 'GET',
+  	      url: 'supprimerVol.htm',
+  	      params: {id: idVol}
+  	    }).success(function(data, status, headers, config) {
+  	      return data;
+  	    });
       	
-    	//return $q.when({id: 0});
+      	return promise;
     }
   };
 
   return volsSrv;
+})
+
+.factory('HotelsSrv', function($q, $http){
+  'use strict';
+  var hotelsSrv = {
+		  
+	/**
+	 * Récupère la liste des hotels
+	 * @return la liste des hotels
+	 */
+    getHotels: function(){
+    	console.log("HotelsSrv : getHotels");
+    	
+    	var promise = $http.get('hotels.htm').then(function (response) {
+            console.log(response);
+            return response.data;
+          });
+    	
+    	return promise;
+    },
+    
+    /**
+     * Ajoute un hotel
+     * @param l'hotel à ajouter
+     * @return l'hotel ajouté
+     */
+    addHotel: function(hotel){
+    	var promise = $http({
+	      method: 'GET',
+	      url: 'ajouterHotel.htm',
+	      params: {nom: hotel.nom, etoile: hotel.etoiles, prix: hotel.prix}
+	    });
+    	
+    	return promise;
+    },
+    
+    /**
+     * Supprime un hotel
+     * @param l'id de l'hotel à supprimer
+     * @return 
+     */
+    deleteHotel: function(idHotel){
+    	var promise = $http({
+  	      method: 'GET',
+  	      url: 'supprimerHotel.htm',
+  	      params: {id: idHotel}
+  	    });
+      	
+      	return promise;
+    }
+  };
+
+  return hotelsSrv;
 })
 
 .factory('LoginEventDispatcher', function($rootScope) {
