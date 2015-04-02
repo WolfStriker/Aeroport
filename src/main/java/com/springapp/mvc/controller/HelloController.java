@@ -7,9 +7,12 @@ import com.springapp.mvc.beans.HotelBean;
 import com.springapp.mvc.beans.VolBean;
 import com.springapp.mvc.dao.Dao;
 
+
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -73,16 +76,31 @@ public class HelloController {
     	return array.toString();
     }
     
-    @RequestMapping(value="/ajouterVol", method = RequestMethod.PUT)
-    public String addVol(@RequestBody VolBean vol){
-    	Dao<VolBean> dao = new Dao<VolBean>();
-    	if(dao.save(vol)){
-    		return "success";
-    	}
-    	else{
-    		return "failed";
-    	}
-    }
+    @RequestMapping(value="/ajouterVol", method=RequestMethod.GET)
+    @ResponseBody
+    public VolBean enregistrerClient(@RequestParam("lieuDepart") String lieudepart, 
+    		@RequestParam("lieuArrivee") String lieuarrivee,
+    		@RequestParam("dateDepart") String datedepart,
+    		@RequestParam("dateArrivee") String datearrivee,
+    		@RequestParam("prix") String prix) {
+    	
+    	VolBean vol = new VolBean();
+    	vol.setLieuDepart(lieudepart);
+    	vol.setLieuArrivee(lieuarrivee);
+    	vol.setDateDepart(datedepart);
+    	vol.setDateArrivee(datearrivee);
+    	vol.setPrix(prix);
+    	vol.setIdAeroport(1);
+		System.out.println("enregistrerVol : ");
+		
+		Dao<VolBean> dao = new Dao<VolBean>();
+		
+		if(dao.save(vol)){
+			return vol;
+		}
+		
+		return null;
+	}
     
     @RequestMapping(value="/ajouterHotel", method = RequestMethod.GET)
     public String addHotel(@RequestBody HotelBean hotel){
@@ -142,5 +160,10 @@ public class HelloController {
         o.put("email", "toto@tata.com");
         array.put(o);
         return array.toString();
+    }
+    
+    public class Test{
+    	public String a;
+    	public String b;
     }
 }

@@ -24,7 +24,7 @@ angular.module('app')
     	console.log("VolsSrv : getVols");
     	var vols = [];
     	
-    	var promise = $http.get('http://localhost:8080/Aeroport/vols.htm').then(function (response) {
+    	var promise = $http.get('vols.htm').then(function (response) {
             console.log(response);
             return response.data;
           });
@@ -38,25 +38,23 @@ angular.module('app')
      * @return l'id du vol ajouté
      */
     addVol: function(vol){
-//      
-    	var promise = $http.put('http://localhost:8080/Aeroport/ajouterVol.htm', vol).then(function (response) {
-            console.log(response);
-            return response.data;
-          });
+    	
+    	/*
+    	var promise = $http.post('ajouterVol.htm', {vol: vol});
     	
     	return promise;
-    	
+    	*/
     	
     	// appel au service d'ajout d'un vol
-//      $http({
-//          method: 'POST',
-//          url: 'http://localhost:8080/Aeroport/api/addVol.html',
-//          headers: {'Content-Type': 'application/json'},
-//          data: vol
-//  	  }).success(function (result) 
-//  	  {
-//      	  console.log(result);
-//      });
+    	
+    	$http({
+	      method: 'GET',
+	      url: 'ajouterVol.htm',
+	      params: {lieuDepart: vol.lieuDepart, lieuArrivee: vol.lieuArrivee, dateDepart: vol.dateDepart, dateArrivee: vol.dateArrivee, prix: vol.prix}
+	    }).success(function (result) {
+  	  		console.log(result);
+		});
+      	
     	//return $q.when({id: 0});
     }
   };

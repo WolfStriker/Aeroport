@@ -84,7 +84,7 @@ angular.module('app')
 	    
 	    $scope.vols.push(vol);
 	    
-	    VolsSrv.addVol(vol).then(function(result){
+	    VolsSrv.addVol(data).then(function(result){
 			console.log("Ajout d'un vol OK");
 			console.log("Id du vol :" + result.id);
 			getVols();
@@ -133,6 +133,22 @@ angular.module('app')
   	});
 
     $scope.doRefresh = function(){
+    	
+    	var data = {};
+    	    
+
+		data.lieuDepart = "Paris";
+		data.lieuArrivee = "Londres";
+		data.dateDepart = "01/02/2015";
+		data.dateArrivee = "01/02/2015";
+		data.prix = "15";
+    
+    	    VolsSrv.addVol(data).then(function(result){
+    			console.log("Ajout d'un vol OK");
+    			console.log("Id du vol :" + result.id);
+    			getVols();
+    		});
+    	
     	getVols();
       	// Stop the ion-refresher from spinning
       	$scope.$broadcast('scroll.refreshComplete');

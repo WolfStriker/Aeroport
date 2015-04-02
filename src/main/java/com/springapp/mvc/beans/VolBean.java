@@ -2,21 +2,43 @@ package com.springapp.mvc.beans;
 
 import javax.persistence.*;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * Created by Antoine on 13/02/2015.
  */
 @Entity
 @Table(name = "vol", schema = "", catalog = "aeroport")
 public class VolBean {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "idVol")
     private int idVol;
+	
+	@NotEmpty(message="Le lieu de départ ne peut être vide")
+    @Column(name = "lieuDepart")
     private String lieuDepart;
+	
+	@NotEmpty(message="Le lieu d'arrivée ne peut être vide")
+    @Column(name = "lieuArrivee")
     private String lieuArrivee;
+	
+	@NotEmpty(message="La date de départ ne peut être vide")
+    @Column(name = "dateDepart")
     private String dateDepart;
+	
+	@NotEmpty(message="La date d'arrivée ne peut être vide")
+    @Column(name = "dateArrivee")
     private String dateArrivee;
+	
+	@NotEmpty(message="Le prix du vol ne peut être vide")
+    @Column(name = "prix")
     private String prix;
 
-    @Id
-    @Column(name = "idVol")
+	@Column(name = "aeroport_idAeroport")
+	private int idAeroport;
+    
     public int getIdVol() {
         return idVol;
     }
@@ -24,9 +46,15 @@ public class VolBean {
     public void setIdVol(int idVol) {
         this.idVol = idVol;
     }
+    
+    public int getIdAeroport() {
+        return idAeroport;
+    }
 
-    @Basic
-    @Column(name = "lieuDepart")
+    public void setIdAeroport(int idVol) {
+        this.idAeroport = idVol;
+    }
+    
     public String getLieuDepart() {
         return lieuDepart;
     }
@@ -35,8 +63,6 @@ public class VolBean {
         this.lieuDepart = lieuDepart;
     }
 
-    @Basic
-    @Column(name = "lieuArrivee")
     public String getLieuArrivee() {
         return lieuArrivee;
     }
@@ -45,8 +71,6 @@ public class VolBean {
         this.lieuArrivee = lieuArrivee;
     }
 
-    @Basic
-    @Column(name = "dateDepart")
     public String getDateDepart() {
         return dateDepart;
     }
@@ -55,8 +79,6 @@ public class VolBean {
         this.dateDepart = dateDepart;
     }
 
-    @Basic
-    @Column(name = "dateArrivee")
     public String getDateArrivee() {
         return dateArrivee;
     }
@@ -65,8 +87,6 @@ public class VolBean {
         this.dateArrivee = dateArrivee;
     }
 
-    @Basic
-    @Column(name = "prix")
     public String getPrix() {
         return prix;
     }
