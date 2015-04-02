@@ -1,65 +1,146 @@
 <html ng-app>
 <head>
-	<title>Panneau publicitaire vols</title>
-	
-	 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-	
-	<script type="text/javascript">
+<title>Panneau publicitaire vols</title>
+<style type="text/css">
+.title {
+	background-image: url(../img/vert.png);
+	font-size: 400%;
+	font-family: Arial;
+	font-weight: bold;
+	color: white;
+	text-indent: 10%;
+
+}
+
+.destination {	
+	background-image: url(../img/gris_clair.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.prixDest {
+	background-image: url(../img/gris_fonce.png);
+	font-size: 600%;
+	font-family: Arial;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+
+}
+
+.descriptionDest {
+	background-image: url(../img/gris_fonce.png);
+	font-size: 200%;
+	font-family: Arial;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+
+}
+
+.hotels {
+	background-image: url(../img/gris_fonce.png);	
+}
+
+.hotel {
+	background-image: url(../img/gris_tres_fonce.png);		
+	font-size: 150%;
+	font-family: Arial;
+	font-weight: bold;
+	color: white;
+}
+
+img {
+	width: 100%;
+	height: 100%;
+}
+
+</style>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+<script type="text/javascript">
 	    function PubController($scope, $http)
 	    {
 	    	$scope.villeDest = "New York";
 	    	$scope.prixVol = "666";
 	    	$scope.villeDepart = "Paris"
-	    	$scope.imageVilleDest = "../../../img/new-york-city-times-square.pjg"; 
+	    	$scope.imageVilleDest = "../img/Grenade1.jpg"; 
 	    	$scope.dateDepart = "13/07/2022";
 	    	
 	    	
 	    	$scope.hotels = [];
 	    	$scope.hotels.push({
-	    		nomHotel 	: "SuperHotelDeOufMalade",
-	    		prixParNuit : "2",
-	    		image		: "../../../img/vert.png"
+	    		nomHotel 	: "Hilton",
+	    		prixParNuit : "600",
+	    		image		: "../img/hotel/NY-1.jpg"
 			});
 	    	$scope.hotels.push({
-	    		nomHotel 	: "HotelTropTropTropNul",
-	    		prixParNuit : "30",
-	    		image		: "../../../img/vert.png"
+	    		nomHotel 	: "Ceasar Palace",
+	    		prixParNuit : "300",
+	    		image		: "../img/hotel/NY-2.jpg"
+			});
+	    	$scope.hotels.push({
+	    		nomHotel 	: "Carl Stones",
+	    		prixParNuit : "35",
+	    		image		: "../img/hotel/NY-71.jpg"
+			});
+	    	$scope.hotels.push({
+	    		nomHotel 	: "Kingsman",
+	    		prixParNuit : "70",
+	    		image		: "../img/hotel/NY-41.jpg"
 			});
 	    }
     </script>
-    
-    
+
+
 </head>
-<body ng-controller="PubController">
+<body ng-controller="PubController" id="main" width="100%" height="100%">
 	<table width="100%" height="100%">
-		<tr height="10%">
-			<td BACKGROUND="../../../img/vert.png">{{villeDest}}</td>
+		<tr class="title" width="100%" height="10%">
+			<td>{{villeDest}}</td>
 		</tr>
-		
-		<tr height="50%">
-			<td BACKGROUND="../../../img/gris_clair.png">
+
+		<tr class="destination" width="100%" height="50%">
+			<td>
 				<table width="100%" height="100%">
 					<tr>
-						<td width="40%">
+						<td>
 							<table width="100%" height="100%">
-								<tr height="50%">
-									<td BACKGROUND="../../../img/vert.png">caca </td>
+								<tr class="prixDest" height="50%">
+									<td class="price">{{prixVol}}€</td>
 								</tr>
-								<tr height="50%">
-									<td BACKGROUND="../../../img/vert.png">prout</td>
+								<tr class="descriptionDest" height="50%">
+									<td class="begin">Départ de {{villeDepart}}<br>le
+										{{dateDepart}}
+									</td>
 								</tr>
 							</table>
 						</td>
-						<td width="60%" ><img src="../../../img/new-york-city-times-square.jpg" width="100%" height="100%"></img></td>
+						<td width="60%" BACKGROUND="{{imageVilleDest}}">
+						</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
-		
-		<tr height="40%">
-			<td BACKGROUND="../../../img/gris_fonce.png">toto</td>
+
+		<tr class="hotels" width="100%" height="40%">
+			<td>
+				<table>
+					<tr>
+						<td ng-repeat="hotel in hotels">
+							<img src={{hotel.image}}></img>
+							<table width="100%" height="100%" class="hotel">
+								<tr>
+									<td text-align="left" width="80%">{{hotel.nomHotel}}</td>
+									<td text-align="right" width="20%">+{{hotel.prixParNuit}}€</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
 		</tr>
-	
 	</table>
 </body>
 
