@@ -89,7 +89,8 @@ angular.module('app')
 	    var data = {
 			nom 	:		hotel.nom,
 			etoiles	:		hotel.etoiles,
-			prix	:		hotel.prix
+			prix	:		hotel.prix,
+			ville	:		hotel.ville
 	    };
 	    // appel au service de création d'un hotel
 	    HotelsSrv.addHotel(data).then(function(result){
@@ -173,7 +174,7 @@ angular.module('app')
  * VolsCtrl
  * Controller gérant la page des vols
  */
-.controller('VolsCtrl', function($scope, $http,  $timeout, $ionicModal, $ionicPopover, $ionicSideMenuDelegate, VolsSrv, sharedProperties){
+.controller('VolsCtrl', function($scope, $http,  $timeout, $ionicModal, $ionicPopover, $ionicSideMenuDelegate, VolsSrv){
   'use strict';
   
   	$scope.data = {
@@ -323,59 +324,60 @@ angular.module('app')
  * LoginCtrl
  * Controller gérant le login de l'administrateur
  */
+
 .controller('LoginCtrl', function($scope, $http, $state, $ionicPopup, UserSrv, LoginEventDispatcher) {
-	
-	$scope.login = null;
-	$scope.password = null;
+
+
+	$scope.login = "admin";
+	$scope.password = "admin";
 	$scope.connected = false;
-	
+
 	/**
 	 * connexion
 	 * Tente de connecter l'utilisateur
 	 * @param identidiants Tableau contenant le login et password saisis par l'utilisateur
-	 */
-	$scope.connexion = function(identifiants) {
-		// si les identifiants sont les bons
+	 */	
+	$scope.connexion = function(identifiants){ 
+		// si les identifiants sont les bons{
 		if(identifiants.login == $scope.login && identifiants.password == $scope.password)
 	    {
-			// l'utilisateur est connecté
-	    	$scope.connected = true;
-	    	// on cache la pop-up de connexion
+			// l'utilisateur est connecté{
+	    	$scope.connected = true
+	    	// on cache la pop-up de connexion;
 	    	$scope.loginModal.hide();
 	    	console.log("Authentification réussie.");
-		}
+	    }
 		// sinon
 		else
 		{
-			// affichage d'une pop-up d'erreur
+			// affichage d'une pop-up d'erreur{
 			$ionicPopup.alert({
 		        title: 'Connexion impossible',
 				template: 'Les identifiants saisis sont incorrects.'
 	        });
 	    }
 	};
-	
+
 	/**
 	 * logoff
 	 * Déconnecte l'utilisateur courant
-	 */
+	 */	
 	$scope.logoff = function()
 	{
-		$scope.connected = false;
-		// dispatch l'evenement de déconnexion sur le bus d'evenements
+		$scope.connected = false
+		// dispatch l'evenement de déconnexion sur le bus d'evenements;
 		LoginEventDispatcher.dispatchEvent('LOGOFF');
 	};
-  
+ 
 	// Appel au service de récupération des informations de l'utilisateur
-	// nom, photo etc...
+	// nom, photo etc... 
 	UserSrv.getUserInfos().then(function(user){
 		$scope.user = user;
 	});
 	
 	// Appel au service de récupération des identfiants de l'utilisateur
 	UserSrv.getUserIdentifiants().then(function(result){
-		$scope.login = result.login;
-		$scope.password = result.password;
+		$scope.user = user;
 	});
 })
 

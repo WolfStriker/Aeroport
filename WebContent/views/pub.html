@@ -66,6 +66,8 @@ img {
 	    	
 	    	$scope.imageParis = "../img/Paris1.jpg";
 	    	$scope.imageGrenade = "../img/Grenade1.jpg";
+	    	$scope.imageRome = "../img/rome.jpeg";
+	    	$scope.imageCopenhague = "../img/copenhague.jpg";
 	    	$scope.imageLondres = "../img/Londres.jpg";
 	    	$scope.imageNY = "../img/NY1.jpg";
 	    	$scope.imageKingston = "../img/Grenade2.jpg";
@@ -96,11 +98,55 @@ img {
 	    		image		: "../img/hotel/NY-41.jpg"
 			});
 	    	
+	    	$scope.hotelsLondres = [];
+	    	$scope.hotelsLondres.push({
+	    		nomHotel 	: "Hilton",
+	    		prixParNuit : "600",
+	    		image		: "../img/hotel/London-1.png"
+			});
+	    	$scope.hotelsLondres.push({
+	    		nomHotel 	: "Ceasar Palace",
+	    		prixParNuit : "300",
+	    		image		: "../img/hotel/London-2.png"
+			});
+	    	$scope.hotelsLondres.push({
+	    		nomHotel 	: "L'hôtel de la Reine",
+	    		prixParNuit : "1500",
+	    		image		: "../img/hotel/London-3.jpg"
+			});
+	    	$scope.hotelsLondres.push({
+	    		nomHotel 	: "Kingsman",
+	    		prixParNuit : "70",
+	    		image		: "../img/hotel/NY-41.jpg"
+			});
+	    	
+	    	$scope.hotelsKingston = [];
+	    	$scope.hotelsKingston.push({
+	    		nomHotel 	: "Hilton",
+	    		prixParNuit : "600",
+	    		image		: "../img/hotel/grenada-05.jpg"
+			});
+	    	$scope.hotelsKingston.push({
+	    		nomHotel 	: "Ceasar Palace",
+	    		prixParNuit : "300",
+	    		image		: "../img/hotel/hotel-veranda.jpg"
+			});
+	    	$scope.hotelsKingston.push({
+	    		nomHotel 	: "Carl Stones",
+	    		prixParNuit : "35",
+	    		image		: "../img/hotel/maurice_hotel.jpg"
+			});
+	    	$scope.hotelsKingston.push({
+	    		nomHotel 	: "Hilton",
+	    		prixParNuit : "600",
+	    		image		: "../img/hotel/Reethi-45.jpg"
+			});
+	    	
 	    	$scope.hotelsGrenade = [];
 	    	$scope.hotelsGrenade.push({
 	    		nomHotel 	: "Hilton",
 	    		prixParNuit : "600",
-	    		image		: "../img/hotel/grenada-05.jpg"
+	    		image		: "../img/hotel/Seb-176.jpg"
 			});
 	    	$scope.hotelsGrenade.push({
 	    		nomHotel 	: "Ceasar Palace",
@@ -110,7 +156,7 @@ img {
 	    	$scope.hotelsGrenade.push({
 	    		nomHotel 	: "Carl Stones",
 	    		prixParNuit : "35",
-	    		image		: "../img/hotel/Reethi-45.jpg"
+	    		image		: "../img/hotel/hotel-2.jpg"
 			});
 	    	$scope.hotelsGrenade.push({
 	    		nomHotel 	: "Hilton",
@@ -163,6 +209,16 @@ img {
 		            	$scope.imagesVille.push($scope.imageParis);
 		            	$scope.hotels.push($scope.hotelsParis);
 		            }
+		            else if($scope.vols[i].villeArrivee == "Rome")
+		            {	
+		            	$scope.imagesVille.push($scope.imageRome);
+		            	$scope.hotels.push($scope.hotelsParis);
+		            }
+		            else if($scope.vols[i].villeArrivee == "Copenhague")
+		            {	
+		            	$scope.imagesVille.push($scope.imageCopenhague);
+		            	$scope.hotels.push($scope.hotelsParis);
+		            }
 					else if($scope.vols[i].villeArrivee == "Grenade")
 					{
 						$scope.hotels.push($scope.hotelsGrenade);
@@ -170,7 +226,7 @@ img {
 					}
 					else if($scope.vols[i].villeArrivee == "Londres")
 					{
-						$scope.hotels.push($scope.hotelsParis);
+						$scope.hotels.push($scope.hotelsLondres);
 						$scope.imagesVille.push($scope.imageLondres);
 					}
 					else if($scope.vols[i].villeArrivee == "New-York")
@@ -180,7 +236,7 @@ img {
 					}
 					else if($scope.vols[i].villeArrivee == "Kingston")
 					{
-						$scope.hotels.push($scope.hotelsGrenade);
+						$scope.hotels.push($scope.hotelsKingston);
 						$scope.imagesVille.push($scope.imageKingston);
 					}
 					else

@@ -127,7 +127,7 @@ angular.module('app')
     	var promise = $http({
 	      method: 'GET',
 	      url: 'ajouterHotel.htm',
-	      params: {nom: hotel.nom, etoile: hotel.etoiles, prix: hotel.prix}
+	      params: {nom: hotel.nom, etoile: hotel.etoiles, prix: hotel.prix, ville: hotel.ville}
 	    });
     	
     	return promise;
