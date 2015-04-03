@@ -66,6 +66,7 @@ public class HelloController {
     		JSONObject o = new JSONObject();
     		o.put("id", v.getIdHotel());
     		o.put("nom", v.getNomHotel());
+    		o.put("villeHotel", v.getVilleHotel());
     		o.put("prix", v.getTarif());
     		o.put("etoiles", v.getEtoiles());
     		array.put(o);
