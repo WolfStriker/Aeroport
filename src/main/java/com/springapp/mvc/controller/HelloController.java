@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -100,12 +101,14 @@ public class HelloController {
     
     @RequestMapping(value="/ajouterHotel", method = RequestMethod.GET)
     @ResponseBody
-    public HotelBean enregistrerHotel(@RequestParam("nom") String nom, 
+    public HotelBean enregistrerHotel(@RequestParam("nom") String nom,
+    		@RequestParam("ville") String ville,
     		@RequestParam("etoile") int etoile,
     		@RequestParam("prix") int prix){
     	
     	HotelBean hotel = new HotelBean();
     	hotel.setNomHotel(nom);
+    	hotel.setVilleHotel(ville);
     	hotel.setEtoiles(etoile);
     	hotel.setTarif(prix);
     	

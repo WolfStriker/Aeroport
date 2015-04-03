@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class HotelBean {
     private int idHotel;
     private String nomHotel;
+    private String villeHotel;
     private Integer etoiles;
     private Integer tarif;
 
@@ -21,6 +22,16 @@ public class HotelBean {
 
     public void setIdHotel(int idHotel) {
         this.idHotel = idHotel;
+    }
+    
+    @Basic
+    @Column(name = "villeHotel")
+    public String getVilleHotel() {
+        return villeHotel;
+    }
+
+    public void setVilleHotel(String villeHotel) {
+        this.villeHotel = villeHotel;
     }
 
     @Basic
