@@ -15,9 +15,20 @@
 	</ion-header-bar>
 	
 	<ion-content scroll="true">
+		<div class="bar bar-header item-input-inset">
+			<label class="item-input-wrapper">
+		    	<i class="icon ion-ios7-search placeholder-icon"></i>
+		    	<input type="search" placeholder="Ville de depart" ng-model="searchVilleDepart">
+  			</label>
+  			<label class="item-input-wrapper" style="margin-left: 5px;">
+		    	<i class="icon ion-ios7-search placeholder-icon"></i>
+		    	<input type="search" placeholder="Ville destination" ng-model="searchVilleDestination">
+  			</label>
+		</div>	
 		<ion-refresher pulling-text="Tirer pour actualiser..." on-refresh="doRefresh()"></ion-refresher>
 		<ion-list show-delete="data.showDelete" show-reorder="data.showReorder" show-option="date.showOption">
-      		<ion-item ng-repeat="vol in vols" vol="vol" class="item-remove-animate">
+      		<ion-item 	ng-repeat="vol in vols | filter: { villeDepart: searchVilleDepart, villeArrivee: searchVilleDestination }" 
+      					vol="vol" class="item-remove-animate">
 	        	<b>{{vol.villeDepart}} - {{vol.villeArrivee}}</b> - {{vol.dateDepart}} - {{vol.prix}}€
 	        	
 	        	<ion-delete-button class="ion-minus-circled" ng-click="onVolDelete(vol)"></ion-delete-button><!-- delete -->

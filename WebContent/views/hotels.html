@@ -14,9 +14,15 @@
     	</div>
 	</ion-header-bar>
 	<ion-content scroll="true">
+	<div class="bar bar-header item-input-inset">
+			<label class="item-input-wrapper">
+		    	<i class="icon ion-ios7-search placeholder-icon"></i>
+		    	<input type="search" placeholder="Rechercher un hotel par ville" ng-model="searchVille">
+  			</label>
+		</div>
 		<ion-refresher pulling-text="Tirer pour actualiser..." on-refresh="doRefresh()"></ion-refresher>
 		<ion-list show-delete="data.showDelete" show-reorder="data.showReorder" show-option="date.showOption">
-      		<ion-item ng-repeat="hotel in hotels" hotel="hotel" class="item-remove-animate">
+      		<ion-item ng-repeat="hotel in hotels | filter: { villeHotel: searchVille } " hotel="hotel" class="item-remove-animate">
 	        	<b>{{hotel.nom}}</b> - {{hotel.villeHotel}} - {{hotel.etoiles}} etoiles - a partir de <b>{{hotel.prix}}€/nuit</b>
 	        	
 	        	<ion-delete-button class="ion-minus-circled" ng-click="onHotelDelete(hotel)"></ion-delete-button><!-- delete -->

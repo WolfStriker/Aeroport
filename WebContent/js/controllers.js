@@ -57,6 +57,11 @@ angular.module('app')
   	 * La liste des hôtels
   	 */
   	$scope.hotels = [];
+  	
+  	/**
+  	 * Filtre de recherche sur la ville de l'hotel
+  	 */
+  	$scope.searchVille = '';
 
   	/**
   	 * showPub
@@ -181,6 +186,16 @@ angular.module('app')
     	showDelete: false,
     	showOption: true
   	};
+  	
+  	/**
+  	 * Filtre de recherche sur la ville de départ
+  	 */
+  	$scope.searchVilleDepart = '';
+  	
+  	/**
+  	 * Filtre de recherche sur la ville destination
+  	 */
+  	$scope.searchVilleDestination = '';
   
   	/**
   	 * La liste des vols
@@ -377,7 +392,8 @@ angular.module('app')
 	
 	// Appel au service de récupération des identfiants de l'utilisateur
 	UserSrv.getUserIdentifiants().then(function(result){
-		$scope.user = user;
+		$scope.login = result.login;
+		$scope.password = result.password;
 	});
 })
 
