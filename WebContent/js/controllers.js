@@ -85,6 +85,7 @@ angular.module('app')
     /**
      * createHotel
      * Crée d'un nouvel hôtel
+     * @param l'hotel à ajouter
      */
 	$scope.createHotel = function(hotel) {
 		console.log("HotelsCtrl : createHotel");
@@ -138,6 +139,7 @@ angular.module('app')
   	/**
   	 * onHotelDelete
   	 * Handler de la demande de suppression d'un hotel
+  	 * @param l'hotel  à supprimer
   	 */
   	$scope.onHotelDelete = function(hotel) {
   		if(!hotel) { return; }
@@ -216,6 +218,7 @@ angular.module('app')
     /**
      * createVol
      * Ajoute un nouveau vol
+     * @param le vol à ajouté
      */
 	$scope.createVol = function(vol) {
 		console.log("VolsCtrl : createVol");
@@ -266,6 +269,7 @@ angular.module('app')
   	/**
   	 * onVolDelete
   	 * Handler de la demande de suppression d'un vol
+  	 * @param le bol à supprimer
   	 */
   	$scope.onVolDelete = function(vol) {
   		if(!vol) { return; }
@@ -297,6 +301,7 @@ angular.module('app')
 	/**
 	 * showPubByVol
 	 * Affiche la prévisualisation d'une pub pour un vol
+	 * @param le vol dont on veut prévisualiser la pub
 	 */
 	$scope.showPubByVol = function(vol) {
 		window.open("views/pub.html#?idVol="+vol.id,'_blank');
