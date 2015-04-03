@@ -17,7 +17,7 @@
 		<ion-refresher pulling-text="Tirer pour actualiser..." on-refresh="doRefresh()"></ion-refresher>
 		<ion-list show-delete="data.showDelete" show-reorder="data.showReorder" show-option="date.showOption">
       		<ion-item ng-repeat="hotel in hotels" hotel="hotel" class="item-remove-animate">
-	        	<b>{{hotel.nom}}</b> - {{hotel.etoiles}} etoiles - a partir de <b>{{hotel.prix}}€/nuit</b>
+	        	<b>{{hotel.nom}}</b> - {{hotel.villeHotel}} - {{hotel.etoiles}} etoiles - a partir de <b>{{hotel.prix}}€/nuit</b>
 	        	
 	        	<ion-delete-button class="ion-minus-circled" ng-click="onHotelDelete(hotel)"></ion-delete-button><!-- delete -->
 	     	</ion-item>
