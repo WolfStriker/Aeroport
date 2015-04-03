@@ -1,29 +1,51 @@
 angular.module('app')
 
+/**
+ * Service des utilisateurs
+ */
 .factory('UserSrv', function($q){
   'use strict';
   var service = {
-    getUser: function(){
+	/**
+	 * getUserInfos
+	 * Récupère les informations de l'utilisateur
+	 * @return les informations concernant l'utilisateur
+	 */
+    getUserInfos: function(){
     	console.log("UserSrv : getUser");
     	return $q.when({id: 'admin', name: 'Administrator', avatar: 'img/empty-profile.jpg'});
+    },
+    
+    /**
+     * getUserIdentifiants
+     * Récupère les identifiants de l'utilisateur
+     * @return les identifiants
+     */
+    getUserIdentifiants: function(){
+    	console.log("UserSrv : getUserIdentifiants");
+    	return $q.when({login: 'admin', password: 'admin'});
     }
   };
 
   return service;
 })
 
+/**
+ * Service opérant du les vols
+ */
 .factory('VolsSrv', function($q, $http){
   'use strict';
   var volsSrv = {
 		  
 	/**
+	 * getVols
 	 * Récupère la liste des vols
 	 * @return la liste des vols
 	 */
     getVols: function(){
     	console.log("VolsSrv : getVols");
     	var vols = [];
-    	
+    	// appel au service java de récupation des vols
     	var promise = $http.get('vols.htm').then(function (response) {
             console.log(response);
             return response.data;
@@ -33,35 +55,29 @@ angular.module('app')
     },
     
     /**
+     * addVol
      * Ajoute un vol
      * @param le vol à ajouter
      * @return le vol ajouté
      */
     addVol: function(vol){
-    	
+    	// appel au service java d'ajout d'un vol
     	var promise = $http.get('ajouterVol.htm', {params: {lieuDepart: vol.lieuDepart, lieuArrivee: vol.lieuArrivee, dateDepart: vol.dateDepart, dateArrivee: vol.dateArrivee, prix: vol.prix}}).then(function (response) {
             console.log(response);
             return response.data;
           });
     	
-//    	var promise = $http({
-//	      method: 'GET',
-//	      url: 'ajouterVol.htm',
-//	      params: {lieuDepart: vol.lieuDepart, lieuArrivee: vol.lieuArrivee, dateDepart: vol.dateDepart, dateArrivee: vol.dateArrivee, prix: vol.prix}
-//	    }).then(function (response) {
-//            console.log(response);
-//            return response.data;
-//          });
-    	
     	return promise;
     },
     
     /**
+     * deleteVol
      * Supprime un vol
      * @param l'id du vol à supprimer
      * @return 
      */
     deleteVol: function(idVol){
+    	// appel au service java de suppression d'un vol
     	var promise = $http({
   	      method: 'GET',
   	      url: 'supprimerVol.htm',
@@ -77,17 +93,21 @@ angular.module('app')
   return volsSrv;
 })
 
+/**
+ * Service opérant sur les hotels
+ */
 .factory('HotelsSrv', function($q, $http){
   'use strict';
   var hotelsSrv = {
 		  
 	/**
+	 * getHotels
 	 * Récupère la liste des hotels
 	 * @return la liste des hotels
 	 */
     getHotels: function(){
     	console.log("HotelsSrv : getHotels");
-    	
+    	// appel au service java de récupération des vols
     	var promise = $http.get('hotels.htm').then(function (response) {
             console.log(response);
             return response.data;
@@ -97,11 +117,13 @@ angular.module('app')
     },
     
     /**
+     * addHotel
      * Ajoute un hotel
      * @param l'hotel à ajouter
      * @return l'hotel ajouté
      */
     addHotel: function(hotel){
+    	// appel au service java d'ajout d'un hotel
     	var promise = $http({
 	      method: 'GET',
 	      url: 'ajouterHotel.htm',
@@ -112,11 +134,13 @@ angular.module('app')
     },
     
     /**
+     * deleteHotel
      * Supprime un hotel
      * @param l'id de l'hotel à supprimer
-     * @return 
+     * @return  l'hotel ajouté
      */
     deleteHotel: function(idHotel){
+    	// appel au service java de suppression d'un hotel
     	var promise = $http({
   	      method: 'GET',
   	      url: 'supprimerHotel.htm',
@@ -130,6 +154,9 @@ angular.module('app')
   return hotelsSrv;
 })
 
+/**
+ * Service simulant un bus d'evenement
+ */
 .factory('LoginEventDispatcher', function($rootScope) {
 	'use strict';
 	
@@ -144,40 +171,4 @@ angular.module('app')
 
   	return loginEventDispatcher;
 })
-
 ;
-
-
-//vols.push({
-//villeDepart :	"Paris",
-//villeArrivee:	"Madrid",
-//dateDepart  :	"12/05/2016",
-//heureDepart : 	"10h30",
-//dateArrivee :	"12/05/2016",
-//heureArrivee: 	"10h31",
-//prix		  : "3"
-//});
-//
-//vols.push({
-//villeDepart :	"Paris",
-//villeArrivee:	"Londre",
-//dateDepart  :	"13/06/2020",
-//heureDepart : 	"11h20",
-//dateArrivee :	"13/06/2020",
-//heureArrivee: 	"23h20",
-//prix		  : "445"
-//});
-
-//// appel au service
-//$http({
-//method: 'GET',
-//url: 'http://localhost:8080/Aeroport/api/test.htm',
-//headers: {'Content-Type': 'application/json'}
-//}).success(function (data) 
-//{
-//  console.log(data);
-//  vols = data;
-//  return $q.when({vols: data});
-//});
-
-//return $q.when({vols: vols});

@@ -21,7 +21,8 @@
 	        	<b>{{vol.villeDepart}} - {{vol.villeArrivee}}</b> - {{vol.dateDepart}} - {{vol.prix}}€
 	        	
 	        	<ion-delete-button class="ion-minus-circled" ng-click="onVolDelete(vol)"></ion-delete-button><!-- delete -->
-	        	<ion-option-button class="ion-edit" ng-click="editVol(vol)"></ion-option-button><!-- edit -->
+	        	<ion-option-button class="ion-eye" ng-click="showPubByVol(vol)">
+	        	</ion-option-button><!-- edit -->
 	     	</ion-item>
 	    </ion-list>
 	</ion-content>

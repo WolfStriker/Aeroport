@@ -51,8 +51,6 @@
 }
 
 img {
-	width: 100%;
-	height: 100%;
 }
 
 </style>
@@ -60,36 +58,159 @@ img {
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 
 <script type="text/javascript">
-	    function PubController($scope, $http)
+	    function PubController($scope, $http, $interval, $location, $timeout)
 	    {
-	    	$scope.villeDest = "New York";
-	    	$scope.prixVol = "666";
-	    	$scope.villeDepart = "Paris"
-	    	$scope.imageVilleDest = "../img/Grenade1.jpg"; 
-	    	$scope.dateDepart = "13/07/2022";
+	    	$scope.vols = [];
+	    	$scope.indexCurrentVol = 0;
+	    	$scope.param = $location.search();
 	    	
+	    	$scope.imageParis = "../img/Paris1.jpg";
+	    	$scope.imageGrenade = "../img/Grenade1.jpg";
+	    	$scope.imageLondres = "../img/Londres.jpg";
+	    	$scope.imageNY = "../img/NY1.jpg";
+	    	$scope.imageKingston = "../img/Grenade2.jpg";
+	    	$scope.imageDefault = "../img/Grenade1.jpg";
 	    	
+	    	$scope.imagesVille = [];
 	    	$scope.hotels = [];
-	    	$scope.hotels.push({
+	    	
+	    	$scope.hotelsParis = [];
+	    	$scope.hotelsParis.push({
 	    		nomHotel 	: "Hilton",
 	    		prixParNuit : "600",
 	    		image		: "../img/hotel/NY-1.jpg"
 			});
-	    	$scope.hotels.push({
+	    	$scope.hotelsParis.push({
 	    		nomHotel 	: "Ceasar Palace",
 	    		prixParNuit : "300",
 	    		image		: "../img/hotel/NY-2.jpg"
 			});
-	    	$scope.hotels.push({
+	    	$scope.hotelsParis.push({
 	    		nomHotel 	: "Carl Stones",
 	    		prixParNuit : "35",
 	    		image		: "../img/hotel/NY-71.jpg"
 			});
-	    	$scope.hotels.push({
+	    	$scope.hotelsParis.push({
 	    		nomHotel 	: "Kingsman",
 	    		prixParNuit : "70",
 	    		image		: "../img/hotel/NY-41.jpg"
 			});
+	    	
+	    	$scope.hotelsGrenade = [];
+	    	$scope.hotelsGrenade.push({
+	    		nomHotel 	: "Hilton",
+	    		prixParNuit : "600",
+	    		image		: "../img/hotel/grenada-05.jpg"
+			});
+	    	$scope.hotelsGrenade.push({
+	    		nomHotel 	: "Ceasar Palace",
+	    		prixParNuit : "300",
+	    		image		: "../img/hotel/Grenada-10.jpg"
+			});
+	    	$scope.hotelsGrenade.push({
+	    		nomHotel 	: "Carl Stones",
+	    		prixParNuit : "35",
+	    		image		: "../img/hotel/Reethi-45.jpg"
+			});
+	    	$scope.hotelsGrenade.push({
+	    		nomHotel 	: "Hilton",
+	    		prixParNuit : "600",
+	    		image		: "../img/hotel/NY-3.jpg"
+			});
+	    	
+	    	$scope.hotelsNY = [];
+	    	$scope.hotelsNY.push({
+	    		nomHotel 	: "Hilton",
+	    		prixParNuit : "600",
+	    		image		: "../img/hotel/NY-3.jpg"
+			});
+	    	$scope.hotelsNY.push({
+	    		nomHotel 	: "Ceasar Palace",
+	    		prixParNuit : "300",
+	    		image		: "../img/hotel/NY-4.jpg"
+			});
+	    	$scope.hotelsNY.push({
+	    		nomHotel 	: "THE Hotel",
+	    		prixParNuit : "350",
+	    		image		: "../img/hotel/NY-71.jpg"
+			});
+	    	$scope.hotelsNY.push({
+	    		nomHotel 	: "Carl Stones",
+	    		prixParNuit : "35",
+	    		image		: "../img/hotel/NY-7.jpg"
+			});
+	    	
+	    	
+	    	var promise = $http.get('http://localhost:8080/Aeroport/vols.htm').then(function (response) {
+	            console.log(response);
+	            $scope.vols = response.data;
+	            
+	            if($scope.param.idVol != null)
+    			{
+    				for(var i=0; i<$scope.vols.length; i++)
+   					{
+   						if($scope.vols[i].id == $scope.param.idVol)
+ 						{
+   							$scope.indexCurrentVol = i;
+ 						}
+   					}
+    			}
+	            
+	            for(var i=0; i<$scope.vols.length; i++)
+				{
+		            if($scope.vols[i].villeArrivee == "Paris")
+		            {	
+		            	$scope.imagesVille.push($scope.imageParis);
+		            	$scope.hotels.push($scope.hotelsParis);
+		            }
+					else if($scope.vols[i].villeArrivee == "Grenade")
+					{
+						$scope.hotels.push($scope.hotelsGrenade);
+						$scope.imagesVille.push($scope.imageGrenade);
+					}
+					else if($scope.vols[i].villeArrivee == "Londres")
+					{
+						$scope.hotels.push($scope.hotelsParis);
+						$scope.imagesVille.push($scope.imageLondres);
+					}
+					else if($scope.vols[i].villeArrivee == "New-York")
+					{
+						$scope.hotels.push($scope.hotelsNY);
+						$scope.imagesVille.push($scope.imageNY);
+					}
+					else if($scope.vols[i].villeArrivee == "Kingston")
+					{
+						$scope.hotels.push($scope.hotelsGrenade);
+						$scope.imagesVille.push($scope.imageKingston);
+					}
+					else
+					{
+						$scope.hotels.push($scope.hotelsParis);
+						$scope.imagesVille.push($scope.imageParis);
+					}
+		            
+				}
+	          });
+	    	
+	    	var promise = $http.get('http://localhost:8080/Aeroport/hotels.htm').then(function (response) {
+	            console.log(response);
+	            //$scope.hotels = response.data;
+	            
+	          });
+	    	
+	    	$interval(function(){
+	    		
+	    		if($scope.param.idVol == null){
+		    		if($scope.indexCurrentVol >= $scope.vols.length-1)
+		    		{
+		    			$scope.indexCurrentVol = 0;
+		    		}
+		    		else
+	    			{
+		    			$scope.indexCurrentVol++;
+	    			}
+	    		}
+    		},3000);
 	    }
     </script>
 
@@ -98,7 +219,7 @@ img {
 <body ng-controller="PubController" id="main" width="100%" height="100%">
 	<table width="100%" height="100%">
 		<tr class="title" width="100%" height="10%">
-			<td>{{villeDest}}</td>
+			<td>{{vols[indexCurrentVol].villeArrivee}}</td>
 		</tr>
 
 		<tr class="destination" width="100%" height="50%">
@@ -108,16 +229,16 @@ img {
 						<td>
 							<table width="100%" height="100%">
 								<tr class="prixDest" height="50%">
-									<td class="price">{{prixVol}}€</td>
+									<td class="price">{{vols[indexCurrentVol].prix}}€</td>
 								</tr>
 								<tr class="descriptionDest" height="50%">
-									<td class="begin">Départ de {{villeDepart}}<br>le
-										{{dateDepart}}
+									<td class="begin">Départ de {{vols[indexCurrentVol].villeDepart}}<br>le
+										{{vols[indexCurrentVol].dateDepart}}
 									</td>
 								</tr>
 							</table>
 						</td>
-						<td width="60%" BACKGROUND="{{imageVilleDest}}">
+						<td width="60%" BACKGROUND="{{imagesVille[indexCurrentVol]}}">
 						</td>
 					</tr>
 				</table>
@@ -128,8 +249,8 @@ img {
 			<td>
 				<table>
 					<tr>
-						<td ng-repeat="hotel in hotels">
-							<img src={{hotel.image}}></img>
+						<td ng-repeat="hotel in hotels[indexCurrentVol]">
+							<img src={{hotel.image}} width="100%"></img>
 							<table width="100%" height="100%" class="hotel">
 								<tr>
 									<td text-align="left" width="80%">{{hotel.nomHotel}}</td>
